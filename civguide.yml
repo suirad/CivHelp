@@ -1,0 +1,52 @@
+# Reference names for each book. These need to be set properly or the book isnt loaded.
+booklist: 
+  - "welcome"
+  - "ham"
+
+# This book is spawned when the player types /guide or /gui; all other books are spawned with their respective names/fullnames
+defaultbook: "welcome"
+
+# A book can have 256 characters per page w/ 50 pages max.
+books:
+  welcome:
+    fullname: "Welcome to CivCraft"
+    pages:
+      - "   ~c:r~iWhat is Civraft?~n~r~qCivCraft is an experiment for communities & political ideologies [...] to work together to create and shape civilization or to watch it fall~q~n-Ttk2, server owner"
+      - "   ~iWhat is Civraft?~n~bNOT just survivial:~n~rAdmins are hands-off and only handle glitches and hackers.~n~bNOT just chaos:~n~rMods allow players and towns to enforce their own rules.~n~bNOT just foreplay;)~n~rNobody pretends -- conflict is genuine and heated."
+      - "   ~iBasic Mechanics~n~r-The world is a circle~n-Stretches 15k blocks~n-500 block chat range~n-Respawn in random area unless you sleep~n-Food grows slowly~n-Mobs spawn sparsely~n-No Nether portals is a lie~n-Nether biomes also~n-No XP from killing"
+      - " Ect. Ect. Ect.~n The welcome to civcraft book needs to be updated anyways, nose goes."
+  ham:
+    fullname: "Green Eggs & Ham"
+    pages:
+      - "~iI do not like ~c:grgreen ~c:beggs and ham..."
+      - "~iI do not like them.."
+      - "~i~u~c:rSam~c:b-~c:dgI~c:b-~c:gAm."
+      
+# Page code reference:
+#-----------------------
+# ~n - New Line
+# ~q - Insert Quotation "
+# ~s - Strikethrough
+# ~b - Bold
+# ~i - Italic
+# ~u - Underline
+# ~r - Reset/remove formatting
+# -- Coloring:
+# ~c:m - Magic
+# ~c:a - Aqua
+# ~c:b - Black
+# ~c:bl - Blue
+# ~c:da - Dark Aqua
+# ~c:db - Dark Blue
+# ~c:dg - Dark Grey
+# ~c:dgr - Dark Green
+# ~c:dp - Dark Purple
+# ~c:dr - Dark Red
+# ~c:go - Gold
+# ~c:g - Gray
+# ~c:gr - Green
+# ~c:lp - Light Purple
+# ~c:r - Red
+# ~c:w - White
+# ~c:y - Yellow
+#-----------------------

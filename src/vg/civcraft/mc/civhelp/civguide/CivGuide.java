@@ -1,5 +1,8 @@
 package vg.civcraft.mc.civhelp.civguide;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -7,9 +10,11 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+
 import vg.civcraft.mc.civhelp.CivHelpPlugin;
 import vg.civcraft.mc.civhelp.civguide.books.CivGuideBook;
 import vg.civcraft.mc.civhelp.civguide.books.CivGuideReader;
@@ -57,10 +62,37 @@ public class CivGuide {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void loadBooks() {
-		help.saveDefaultConfig();
-		help.reloadConfig();
-		FileConfiguration config = help.getConfig();
+		File dir = help.getDataFolder();
+		FileConfiguration config;
+		boolean created = false;
+		if (!dir.exists()){dir.mkdir();}
+		File file = new File(dir,"civguide.yml");
+		if (!file.exists()){
+			try {
+				file.createNewFile();
+				created = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+		}
+		
+		if (created){
+			InputStream internal = help.getResource("civguide.yml");
+			config = YamlConfiguration.loadConfiguration(internal);
+			try {
+				config.save(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else{
+			config = YamlConfiguration.loadConfiguration(file);
+		}
+		
+		
 		if (!config.contains("booklist")){return;}
 		
 		List<String> booklist = config.getStringList("booklist");

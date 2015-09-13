@@ -1,7 +1,27 @@
 name: CivHelp
 main: vg.civcraft.mc.civhelp.CivHelpPlugin
 version: 1.0.0
-author: suirad & BlackXnt
+author: ['Suiradx', 'BlackXnt', 'Maxopoly', 'Rourke750']
 commands:
     guide:
       aliases: [gui]
+      description: Book Spawn command.
+      permission: CivHelp.CivGuide
+      usage: /guide <bookname>
+    help:
+      description: Help command.
+      aliases: [help]
+      permission: CivHelp.CivMenu
+      usage: /help plugin
+    sign:
+      description: Command to sign agreement.
+      aliases: [sign]
+      permission: CivHelp.CivMenu
+      usage: /sign
+permissions:
+    CivHelp.CivGuide:
+      description: Gives access to /guide
+      default: true
+    CivHelp.CivMenu:
+      description: Gives access to /sign and /help
+      default: true

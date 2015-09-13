@@ -23,19 +23,31 @@ public class CivHelpPlugin extends JavaPlugin{
 
 	@Override
 	public void onDisable() {
-		civGuide.onDisable(); civGuide = null;
+		if (civGuide != null){
+			civGuide.onDisable();
+			civGuide = null;
+		}
 		
 	}
 
 	@Override
 	public void onEnable() {
 		instance = this;
-		civGuide = new CivGuide();
-		civGuide.onEnable();
+		instance.saveDefaultConfig();
+		instance.reloadConfig();
+		if (instance.getConfig().getBoolean("civguide_enabled", false)){
+			civGuide = new CivGuide();
+			civGuide.onEnable();
+			instance.getLogger().info("Loaded CivGuide");
+		}
 	}
 
 	public static CivHelpPlugin getInstance() {
 		return instance;
+	}
+	
+	public boolean isCivGuideEnabled(){
+		return (civGuide != null);
 	}
 	
 	public CivGuide getCivGuide(){
