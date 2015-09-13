@@ -1,0 +1,16 @@
+terms:
+  link: https://civcraft.github.io/civcraftsite/termsofservice.html
+  message: You can click this message to open up the terms of service.
+  MovementRange: 15
+  confirm: Once you've read it, you can click this message to agree to the terms
+  kickDelay: 6000
+  kickMessage: You must accept the terms in order to play
+  welcome: Welcome!
+save:
+  manager: 0
+mysql:
+  dbname: bukkit
+  host: localhost
+  password: ''
+  port: 3306
+  username: bukkit

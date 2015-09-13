@@ -7,7 +7,7 @@ commands:
       aliases: [gui]
       description: Book Spawn command.
       permission: CivHelp.CivGuide
-      usage: /guide <bookname>
+      usage: /guide <BookName|BookFullName>
     help:
       description: Help command.
       aliases: [help]

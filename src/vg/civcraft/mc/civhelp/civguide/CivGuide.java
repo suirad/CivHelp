@@ -64,11 +64,12 @@ public class CivGuide {
 	
 	@SuppressWarnings("deprecation")
 	private void loadBooks() {
+		String cfgname = "civguide.yml";
 		File dir = help.getDataFolder();
 		FileConfiguration config;
 		boolean created = false;
 		if (!dir.exists()){dir.mkdir();}
-		File file = new File(dir,"civguide.yml");
+		File file = new File(dir,cfgname);
 		if (!file.exists()){
 			try {
 				file.createNewFile();
@@ -80,7 +81,7 @@ public class CivGuide {
 		}
 		
 		if (created){
-			InputStream internal = help.getResource("civguide.yml");
+			InputStream internal = help.getResource(cfgname);
 			config = YamlConfiguration.loadConfiguration(internal);
 			try {
 				config.save(file);

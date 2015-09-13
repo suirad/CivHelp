@@ -6,10 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import vg.civcraft.mc.civhelp.civguide.CivGuide;
+import vg.civcraft.mc.civhelp.civmenu.CivMenu;
 
 public class CivHelpPlugin extends JavaPlugin{
 	private static CivHelpPlugin instance;
-	private static CivGuide civGuide;
+	private CivGuide civGuide;
+	private CivMenu civMenu;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
@@ -27,6 +29,10 @@ public class CivHelpPlugin extends JavaPlugin{
 			civGuide.onDisable();
 			civGuide = null;
 		}
+		if (civMenu != null){
+			civMenu.onDisable();
+			civMenu = null;
+		}
 		
 	}
 
@@ -40,6 +46,11 @@ public class CivHelpPlugin extends JavaPlugin{
 			civGuide.onEnable();
 			instance.getLogger().info("Loaded CivGuide");
 		}
+		if (instance.getConfig().getBoolean("civmenu_enabled", false)){
+			civMenu = new CivMenu();
+			civMenu.onEnable();
+			instance.getLogger().info("Loaded CivMenu");
+		}
 	}
 
 	public static CivHelpPlugin getInstance() {
@@ -52,5 +63,13 @@ public class CivHelpPlugin extends JavaPlugin{
 	
 	public CivGuide getCivGuide(){
 		return civGuide;
+	}
+	
+	public CivMenu getCivMenu(){
+		return civMenu;
+	}
+	
+	public boolean isCivMenuEnabled(){
+		return (civMenu != null);
 	}
 }
