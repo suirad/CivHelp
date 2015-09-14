@@ -20,13 +20,14 @@ import vg.civcraft.mc.civhelp.civmenu.database.TOSManager;
 
 public class CivMenu {
 	
-	private TOSManager tosManager;
+	private static TOSManager tosManager;
 	private static CivHelpPlugin plugin;
+	private static CivMenuAPI api;
 	private FileConfiguration config;
 	
 	public void onEnable() {
 		plugin = CivHelpPlugin.getInstance();
-		
+		api = new CivMenuAPI();
 		config = loadconfig();
 		
 		tosManager = new TOSManager(plugin);
@@ -107,7 +108,6 @@ public class CivMenu {
 			
 			menu.addPart(part);
 		}
-    	
     	player.spigot().sendMessage(menu.create());
     	
     }

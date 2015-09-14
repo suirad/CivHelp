@@ -68,6 +68,7 @@ public class CommandHandler implements CommandExecutor{
 		
 		if (!TOSManager.isTermPlayer(player, "CivMenu Agreement")){
 			if(TOSManager.addPlayer(player, "CivMenu Agreement")){
+				TOSManager.save();
 				player.sendMessage("Thank you for signing the terms of service");
 				return true;
 			}

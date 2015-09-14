@@ -45,8 +45,10 @@ public class FlatFileManager implements ISaveLoad{
 	@Override
 	public void save() {
 		StringBuilder builder = new StringBuilder();
-		for (TermObject term: registeredPlayers.values())
-			builder.append(term.toString() + "\n");
+		for (UUID p: registeredPlayers.keySet()){
+			builder.append(p.toString()+":"+ registeredPlayers.get(p).toString());
+			builder.append(System.lineSeparator());
+		}
 		writeToFile(builder.toString(), logFile);
 	}
 	
@@ -55,7 +57,7 @@ public class FlatFileManager implements ISaveLoad{
 		try
 		{
 		    writer = new BufferedWriter(new FileWriter(file));
-		    writer.write(content+"\n");
+		    writer.write(content+System.lineSeparator());
 
 		}
 		catch ( IOException e)

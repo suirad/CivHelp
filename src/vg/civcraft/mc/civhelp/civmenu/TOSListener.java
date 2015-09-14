@@ -24,11 +24,11 @@ public class TOSListener implements Listener {
 	private CivHelpPlugin plugin;
 	private Map<UUID, Location> locations;
 	private FileConfiguration config;
-	private CivMenuAPI api = CivMenuAPI.getInstance();
+	private static CivMenuAPI api = CivMenuAPI.getInstance();
 
 	public TOSListener(CivHelpPlugin plugin) {
 		this.plugin = plugin;
-		plugin.getCivMenu().getConfig();
+		config = plugin.getCivMenu().getConfig();
 		locations = new ConcurrentHashMap<UUID, Location>();
 	}
 	
@@ -57,6 +57,7 @@ public class TOSListener implements Listener {
 	public void playerMoveEvent(PlayerMoveEvent event) {
 		Player p = event.getPlayer();
 		if (!TOSManager.isTermPlayer(p, "CivMenu Agreement")) {
+			if (!locations.containsKey(p.getUniqueId())){return;}
 			if(event.getTo().distance(locations.get(p.getUniqueId())) > config.getInt("terms.MovementRange",15)){
 				p.sendMessage(ChatColor.RED + "You must accept the terms in order to play.");
 				sendTOS(p);

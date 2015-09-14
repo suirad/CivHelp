@@ -58,7 +58,7 @@ public class TOSManager {
 		return manager != null && manager.isAddedPlayer(p, term);
 	}
 	
-	public void save() {
+	public static void save() {
 		manager.save();
 	}
 }
