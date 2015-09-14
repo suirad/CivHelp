@@ -5,7 +5,7 @@
 	<groupId>vg.civcraft.mc</groupId>
 	<artifactId>CivHelp</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<name>CivHelp</name>
 	<url>https://github.com/Civcraft/CivHelp</url>
 

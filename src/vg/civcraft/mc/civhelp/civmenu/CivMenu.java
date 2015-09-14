@@ -83,7 +83,7 @@ public class CivMenu {
 
 
 	public void onDisable() { 
-    	tosManager.save();
+    	TOSManager.save();
     }
 
     public void SendHelpMenu(Player player, JavaPlugin plugin){

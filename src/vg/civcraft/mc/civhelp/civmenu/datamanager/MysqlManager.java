@@ -54,7 +54,7 @@ public class MysqlManager implements ISaveLoad{
 		db.execute("create table if not exists civ_menu_data("
 				+ "uuid varchar(36) not null,"
 				+ "term varchar(255) not null,"
-				+ "primary key uuid_info(uuid, info));");
+				+ "primary key uuid_info(uuid, term));");
 	}
 
 	@Override

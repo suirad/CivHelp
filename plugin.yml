@@ -1,6 +1,6 @@
 name: CivHelp
 main: vg.civcraft.mc.civhelp.CivHelpPlugin
-version: 1.0.0
+version: 1.1.0
 author: ['Suiradx', 'BlackXnt', 'Maxopoly', 'Rourke750']
 commands:
     guide:
