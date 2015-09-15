@@ -1,6 +1,5 @@
 package vg.civcraft.mc.civhelp.civmenu;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,10 +12,12 @@ import vg.civcraft.mc.civhelp.civmenu.database.TOSManager;
 
 public class CommandHandler implements CommandExecutor{
 
-	private CivHelpPlugin pluginInstance = null;
+	private CivHelpPlugin plugin = null;
+	private CivMenuAPI api;
 	
 	public CommandHandler(CivHelpPlugin pluginInstance) {
-		this.pluginInstance = pluginInstance;
+		this.plugin = pluginInstance;
+		api = CivMenuAPI.getInstance();
 	}	
 	
 	@Override
@@ -39,22 +40,24 @@ public class CommandHandler implements CommandExecutor{
 
 	private boolean commandHelp(CommandSender sender, String[] argv) {
 		
-		if (argv.length < 1) {
-			return false;
-		}
-		
 		if(!(sender instanceof Player)){
-			return false;
+			sender.sendMessage("This command can only be executed by a player");
+			return true;
 		}
 		
-		for(Plugin plugin : Bukkit.getPluginManager().getPlugins()){
+		if (argv.length < 1){
+			api.sendHelpMenu(((Player)sender), null);
+			return true;
+		}
+		
+		for(Plugin plugin : plugin.getServer().getPluginManager().getPlugins()){
 			if(plugin.getName().equalsIgnoreCase(argv[0])){
-				pluginInstance.getCivMenu().SendHelpMenu(((Player)sender), (JavaPlugin)plugin);
+				api.sendHelpMenu(((Player)sender), (JavaPlugin)plugin);
 				return true;
 			}
 		}
 		
-		((Player)sender).sendMessage("Plugin wasn't found");
+		api.sendHelpMenu((Player)sender, null);
 		return true;
 	}
 

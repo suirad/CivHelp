@@ -1,11 +1,15 @@
 terms:
+  title: "Welcome to Civcraft!"
+  message: "Civcraft is an experiment for communities, political ideologies, debate and discussion. Before you can start playing and join a civilization you must first read and agree to the terms of service."
   link: https://civcraft.github.io/civcraftsite/termsofservice.html
-  message: You can click this message to open up the terms of service.
-  MovementRange: 15
-  confirm: Once you've read it, you can click this message to agree to the terms
-  kickDelay: 6000
-  kickMessage: You must accept the terms in order to play
-  welcome: Welcome!
+  linkmessage: "You can click this message to open up the terms of service."
+  movementrange: 15
+  confirm: "Once you've read it, you can click this message to agree to the terms"
+  kickdelay: 6000
+  kickmessage: "You must accept the terms in order to play"
+helpmenu:
+  message: "Civcraft is a unique Minecraft server where the players make the rules. It's an experiment for communities, political ideologies, debate and discussion. Most Minecraft servers have rules, like “no griefing”, “no stealing”, or “be nice”. Civcraft doesn't. However, that doesn't mean you can run wild throughout the world, pillaging and plundering all that you come across, because Civcraft isn't an ordinary vanilla Minecraft server. We have a collection of plugins that encourages co-operation between players by increasing Minecraft's base difficulty tenfold and puts players in control of justice."
+  plugins: "NameLayer, Citadel, JukeAlert, RealisticBiomes, ItemExchange, CivChat2"
 save:
   manager: 0
 mysql:
@@ -14,3 +18,7 @@ mysql:
   password: ''
   port: 3306
   username: bukkit
+aliases:
+  jukealert:
+    juke_place: "You have placed a jukebox. These are also known as snitches and track player activites."
+    default: "For more information about JukeAlert, please click here."

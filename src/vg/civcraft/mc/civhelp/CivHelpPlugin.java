@@ -51,6 +51,7 @@ public class CivHelpPlugin extends JavaPlugin{
 			civMenu.onEnable();
 			instance.getLogger().info("Loaded CivMenu");
 		}
+		
 	}
 
 	public static CivHelpPlugin getInstance() {

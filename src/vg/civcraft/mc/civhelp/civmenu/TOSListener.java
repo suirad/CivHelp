@@ -15,6 +15,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import vg.civcraft.mc.civhelp.CivHelpPlugin;
 import vg.civcraft.mc.civhelp.civmenu.database.TOSManager;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -24,7 +26,6 @@ public class TOSListener implements Listener {
 	private CivHelpPlugin plugin;
 	private Map<UUID, Location> locations;
 	private FileConfiguration config;
-	private static CivMenuAPI api = CivMenuAPI.getInstance();
 
 	public TOSListener(CivHelpPlugin plugin) {
 		this.plugin = plugin;
@@ -44,12 +45,12 @@ public class TOSListener implements Listener {
 				public void run() {
 					locations.remove(p.getUniqueId());
 					if(!TOSManager.isTermPlayer(p, "CivMenu Agreement")){
-						p.kickPlayer(config.getString("terms.kickMessage",
+						p.kickPlayer(config.getString("terms.kickmessage",
 								"You must accept the terms in order to play"));
 					}
 					
 				}
-			}.runTaskLater(this.plugin, config.getInt("terms.kickDelay", 6000));
+			}.runTaskLater(this.plugin, config.getInt("terms.kickdelay", 6000));
 		}
 	}
 	
@@ -58,7 +59,7 @@ public class TOSListener implements Listener {
 		Player p = event.getPlayer();
 		if (!TOSManager.isTermPlayer(p, "CivMenu Agreement")) {
 			if (!locations.containsKey(p.getUniqueId())){return;}
-			if(event.getTo().distance(locations.get(p.getUniqueId())) > config.getInt("terms.MovementRange",15)){
+			if(event.getTo().distance(locations.get(p.getUniqueId())) > config.getInt("terms.movementrange",15)){
 				p.sendMessage(ChatColor.RED + "You must accept the terms in order to play.");
 				sendTOS(p);
 				event.setTo(locations.get(p.getUniqueId()));
@@ -70,25 +71,25 @@ public class TOSListener implements Listener {
 
 		Menu menu = new Menu();
 
-		TextComponent welcome = new TextComponent(config.getString("terms.welcome","Welcome!"));
-		welcome.setColor(ChatColor.RED);
-		welcome.setBold(true);
+		TextComponent welcome = new TextComponent(config.getString("terms.title"));
+		welcome.setColor(ChatColor.YELLOW);
 		menu.setTitle(welcome);
 
-		TextComponent agree = new TextComponent(
-				config.getString("terms.message","You can click this message to open up the terms of service."));
+		TextComponent message = new TextComponent(config.getString("terms.message"));
+		message.setColor(ChatColor.AQUA);
+		menu.setSubTitle(message);
 
-		agree.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, config.getString("terms.link",
-				"http://www.google.com")));
-		menu.setSubTitle(agree);
+		TextComponent link = new TextComponent(config.getString("terms.linkmessage"));
+		link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, config.getString("terms.link")));
+		link.setItalic(true);
+		menu.addPart(link);
 		
-		TextComponent confirm = new TextComponent(config.getString("terms.confirm",
-				"Once you've read it, you can click this message to agree to the terms"));
-		confirm.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,
-				"/sign"));
-		
+		TextComponent confirm = new TextComponent(config.getString("terms.confirm"));
+		confirm.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND,"/sign"));
+		confirm.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("/sign").create()));
+		confirm.setItalic(true);
 		menu.addPart(confirm);
 		
-		api.performAction(p, menu);
+		menu.sendPlayer(p);
 	}
 }

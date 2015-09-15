@@ -4,17 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-
-import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import vg.civcraft.mc.civhelp.CivHelpPlugin;
 import vg.civcraft.mc.civhelp.civmenu.database.TOSManager;
 
@@ -27,9 +18,8 @@ public class CivMenu {
 	
 	public void onEnable() {
 		plugin = CivHelpPlugin.getInstance();
-		api = new CivMenuAPI();
 		config = loadconfig();
-		
+		api = new CivMenuAPI();
 		tosManager = new TOSManager(plugin);
 		plugin.getServer().getPluginManager().registerEvents(new TOSListener(plugin), plugin);
 		
@@ -86,36 +76,9 @@ public class CivMenu {
     	TOSManager.save();
     }
 
-    public void SendHelpMenu(Player player, JavaPlugin plugin){
-    	Menu menu = new Menu();
-    	
-		menu.setTitle(new TextComponent(plugin.getName()));
-
-		if(plugin.getDescription().getDescription()!=null){
-			menu.setSubTitle(new TextComponent(plugin.getDescription().getDescription()));
-		}
-		
-    	for (String commandName : plugin.getDescription().getCommands().keySet()) {
-    		Command command = plugin.getCommand(commandName);
-			if(command.getPermission()!=null && !player.hasPermission(command.getPermission())){
-				continue;
-			}
-			TextComponent part = new TextComponent(command.getLabel());
-			part.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(command.getDescription()).create()));
-			
-			//This simply doesn't work. Nice one Spigot.
-			part.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/" + command.getLabel()));
-			
-			menu.addPart(part);
-		}
-    	player.spigot().sendMessage(menu.create());
-    	
-    }
-    
-	public TOSManager getTosManager() {
-		return tosManager;
+	public static CivMenuAPI getApi() {
+		return api;
 	}
-
 
 
     
